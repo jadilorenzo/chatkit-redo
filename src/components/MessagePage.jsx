@@ -1,10 +1,11 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import Page from './Page.jsx'
 import AppContext from '../AppContext'
 import {Redirect} from 'react-router-dom'
 
 const MessagePage = () => {
   const { user, messages, userId } = useContext(AppContext)
+  const [currentMessage, setCurrentMessage] = useState('')
 
   const date = new Date(user.createdAt)
   const displayMessages = messages.map((item, index) => {
@@ -29,8 +30,14 @@ const MessagePage = () => {
           {displayMessages}
         </div>
         <div className='bg-gray-300 p-4 w-full'>
-          <input/>
-          <button className='bg-green-600 rounded px-4 mx-4 text-white hover:bg-green-700'>Send</button>
+          <form onSubmit={(e) => {
+            e.preventDefault()
+            user.sendSimpleMessage({ text: currentMessage, roomId: user.rooms[0].id })
+            setCurrentMessage('')
+          }}>
+            <input value={currentMessage}  onChange={(e) => setCurrentMessage(e.target.value)}/>
+            <button type='submit' className='bg-green-600 rounded px-4 mx-4 text-white hover:bg-green-700'>Send</button>
+          </form>
         </div>
       </Page>
     </div>
