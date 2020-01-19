@@ -2,14 +2,14 @@ import React from 'react';
 import NavBar from './NavBar.jsx'
 // import logo from './logo.svg';
 
-const App = (props) => {
-  const side = 'h-screen scroll border-l border-r border-green-800'
+const Page = (props) => {
+  const side = 'h-screen scroll md:border-l md:border-r md:border-green-800 border-white'
   return (
-    <div className="flex h-full w-full">
+    <div className="flex h-screen w-full">
       <div className={`hidden md:w-1/3 md:block ${side}`}><NavBar/></div>
-      <div className={`w-full md:w-full${side} flex flex-col`}>{props.children}</div>
+      <div className={`w-full h-full md:w-full${side} flex flex-col`}>{props.children}</div>
     </div>
   );
 }
 
-export default App;
+export default Page;

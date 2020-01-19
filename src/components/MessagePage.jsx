@@ -1,9 +1,10 @@
 import React, {useContext} from 'react'
 import Page from './Page.jsx'
 import AppContext from '../AppContext'
+import {Redirect} from 'react-router-dom'
 
 const MessagePage = () => {
-  const { user, messages } = useContext(AppContext)
+  const { user, messages, userId } = useContext(AppContext)
 
   const date = new Date(user.createdAt)
   const displayMessages = messages.map((item, index) => {
@@ -14,10 +15,14 @@ const MessagePage = () => {
     );
   });
 
+  if (userId === '') {
+    return <Redirect to='/'/>
+  }
+
   return (
     <div>
       <Page>
-        <div>
+        <div className=''>
           <div className='text-2xl p-4 bg-green-800 text-white'>{user.name} | {date.toDateString()}</div>
         </div>
         <div style={{overflow: 'scroll'}} className='p-4'>
