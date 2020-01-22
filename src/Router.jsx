@@ -16,13 +16,15 @@ const Router = () => {
   const state = { messages, setMessages, userId, setUserId, user, setUser, loaded, setLoaded}
 
   useEffect(() => {
-    setMessages([])
-    const chatManager = chat.connect(userId, setUser, (message) => {
-      setLoaded(true)
-      setMessages(m => [...m, message]);
-    });
+    if (userId !== '') {
+      setMessages([])
+      const chatManager = chat.connect(userId, setUser, (message) => {
+        setLoaded(true)
+        setMessages(m => [...m, message]);
+      });
 
-    setChatManager(chatManager)
+      setChatManager(chatManager)
+    }
   }, [userId]);
 
   return (
