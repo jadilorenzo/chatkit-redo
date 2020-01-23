@@ -1,15 +1,17 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import Page from './Page.jsx'
 import AppContext from '../AppContext'
 import {Redirect} from 'react-router-dom'
 
 
 const LoginPage = () => {
-  const { setUserId } = useContext(AppContext)
+  const { setUserId, setUser } = useContext(AppContext)
   const [ currentUserId, setCurrentUserId ] = useState('')
   const [ redirect, setRedirect ] = useState(false)
 
-  console.log(currentUserId);
+  useEffect(() => {
+    setUser({name: 'Loading...', createdAt: '2000-01-31T03:24:00', rooms: [], fake: true})
+  }, [])
 
   if (redirect) {
     return <Redirect to='/messages'/>
@@ -29,7 +31,7 @@ const LoginPage = () => {
           <button onClick={() => {
             setUserId(currentUserId)
             setRedirect(true)
-          }}className='bg-green-600 block rounded px-4 my-4 text-white hover:bg-green-700'>Login</button>
+          }} className='bg-green-600 block rounded px-4 my-4 text-white hover:bg-green-700'>Login</button>
         </div>
       </Page>
     </div>

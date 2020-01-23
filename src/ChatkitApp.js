@@ -24,11 +24,12 @@ const chat = ({
 
   createChatManager: (name = 'jacob') => createChatManager(name),
 
-  connect: (userId, onLoaded, onMessage) => {
+  connect: (userId, onLoaded, onMessage, roomId) => {
+    console.log(roomId)
     createChatManager(userId).connect().then(currentUser => {
         onLoaded(currentUser)
         currentUser.subscribeToRoomMultipart({
-          roomId: currentUser.rooms[0].id,
+          roomId: currentUser.rooms[roomId].id,
           hooks: {
             onMessage
           }

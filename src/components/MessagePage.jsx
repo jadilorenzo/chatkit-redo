@@ -7,7 +7,7 @@ const MessagePage = () => {
   const { user, messages, userId } = useContext(AppContext)
   const [currentMessage, setCurrentMessage] = useState('')
 
-  const date = new Date(user.createdAt)
+  const date = new Date()
   const displayMessages = messages.map((item, index) => {
     return (
       <ul key={index}>

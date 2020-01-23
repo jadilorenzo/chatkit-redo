@@ -10,10 +10,12 @@ const Router = () => {
   const [chatManager, setChatManager] = useState({})
   const [loaded, setLoaded] = useState(false)
   const [userId, setUserId] = useState('')
-  const [user, setUser] = useState({name: 'Loading...', createdAt: '2000-01-31T03:24:00'})
+  const [roomId, setRoomId] = useState(0)
+  const [availableRooms, setAvailableRooms] = useState([])
+  const [user, setUser] = useState({name: 'Loading...', createdAt: '2000-01-31T03:24:00', rooms: [], fake: true})
   const [messages, setMessages] = useState([/*{partType: "inline", parts: {payload: {type: "text/plain", content: "Hello"}}}*/])
 
-  const state = { messages, setMessages, userId, setUserId, user, setUser, loaded, setLoaded}
+  const state = { messages, setMessages, userId, setUserId, user, setUser, loaded, setLoaded, roomId, setRoomId, availableRooms, setAvailableRooms}
 
   useEffect(() => {
     if (userId !== '') {
@@ -21,11 +23,11 @@ const Router = () => {
       const chatManager = chat.connect(userId, setUser, (message) => {
         setLoaded(true)
         setMessages(m => [...m, message]);
-      });
+      }, roomId);
 
       setChatManager(chatManager)
     }
-  }, [userId]);
+  }, [userId, roomId]);
 
   return (
     <BrowserRouter>
