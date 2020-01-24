@@ -8,27 +8,28 @@ import chat from './ChatkitApp'
 import AppContext from './AppContext'
 
 const Router = () => {
-  const [chatManager, setChatManager] = useState({})
-  const [loaded, setLoaded] = useState(false)
-  const [userId, setUserId] = useState('')
-  const [roomId, setRoomId] = useState(0)
   const [availableRooms, setAvailableRooms] = useState([])
-  const [user, setUser] = useState({name: 'Loading...', createdAt: '2000-01-31T03:24:00', rooms: [], fake: true})
-  const [messages, setMessages] = useState([/*{partType: "inline", parts: {payload: {type: "text/plain", content: "Hello"}}}*/])
+  const [chatManager, setChatManager] = useState({})
   const [isCreatingRoom, setIsCreatingRoom] = useState(false)
+  const [loaded, setLoaded] = useState(false)
+  const [messages, setMessages] = useState([/*{partType: "inline", parts: {payload: {type: "text/plain", content: "Hello"}}}*/])
   const [newRoomName, setNewRoomName] = useState('')
+  const [roomId, setRoomId] = useState(0)
+  const [userId, setUserId] = useState('')
+  const [user, setUser] = useState({name: 'Loading...', createdAt: '2000-01-31T03:24:00', rooms: [], fake: true})
+
 
 
   const state = {
-    messages, setMessages,
-    userId, setUserId,
-    user, setUser,
-    loaded, setLoaded,
-    roomId, setRoomId,
     availableRooms, setAvailableRooms,
+    chatManager, setChatManager,
     isCreatingRoom, setIsCreatingRoom,
+    loaded, setLoaded,
+    messages, setMessages,
     newRoomName, setNewRoomName,
-    chatManager, setChatManager
+    roomId, setRoomId,
+    userId, setUserId,
+    user, setUser
   }
 
   useEffect(() => {
