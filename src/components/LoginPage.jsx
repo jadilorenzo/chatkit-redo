@@ -11,7 +11,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     setUser({name: 'Loading...', createdAt: '2000-01-31T03:24:00', rooms: [], fake: true})
-  }, [])
+  }, [setUser])
 
   if (redirect) {
     return <Redirect to='/messages'/>

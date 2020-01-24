@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import MessagePage from './components/MessagePage.jsx'
 import LoginPage from './components/LoginPage.jsx'
+import InfoPage from './components/InfoPage.jsx'
+import CreateRoomPage from './components/CreateRoomPage.jsx'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import chat from './ChatkitApp'
-import {v4} from 'uuid'
 import AppContext from './AppContext'
 
 const Router = () => {
@@ -14,8 +15,21 @@ const Router = () => {
   const [availableRooms, setAvailableRooms] = useState([])
   const [user, setUser] = useState({name: 'Loading...', createdAt: '2000-01-31T03:24:00', rooms: [], fake: true})
   const [messages, setMessages] = useState([/*{partType: "inline", parts: {payload: {type: "text/plain", content: "Hello"}}}*/])
+  const [isCreatingRoom, setIsCreatingRoom] = useState(false)
+  const [newRoomName, setNewRoomName] = useState('')
 
-  const state = { messages, setMessages, userId, setUserId, user, setUser, loaded, setLoaded, roomId, setRoomId, availableRooms, setAvailableRooms}
+
+  const state = {
+    messages, setMessages,
+    userId, setUserId,
+    user, setUser,
+    loaded, setLoaded,
+    roomId, setRoomId,
+    availableRooms, setAvailableRooms,
+    isCreatingRoom, setIsCreatingRoom,
+    newRoomName, setNewRoomName,
+    chatManager, setChatManager
+  }
 
   useEffect(() => {
     if (userId !== '') {
@@ -41,6 +55,12 @@ const Router = () => {
             </Route>
             <Route exact path='/messages'>
               <MessagePage/>
+            </Route>
+            <Route exact path='/info'>
+              <InfoPage/>
+            </Route>
+            <Route exact path='/create-room'>
+              <CreateRoomPage/>
             </Route>
           </Switch>
         </div>
