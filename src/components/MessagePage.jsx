@@ -16,7 +16,7 @@ const MessagePage = () => {
     );
   });
 
-  if (userId === '') {
+  if (user.fake) {
     return <Redirect to='/'/>
   }
 

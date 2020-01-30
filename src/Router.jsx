@@ -6,6 +6,7 @@ import CreateRoomPage from './components/CreateRoomPage.jsx'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import chat from './ChatkitApp'
 import AppContext from './AppContext'
+import './App.css'
 
 const Router = () => {
   const [availableRooms, setAvailableRooms] = useState([])
@@ -17,8 +18,6 @@ const Router = () => {
   const [roomId, setRoomId] = useState(0)
   const [userId, setUserId] = useState('')
   const [user, setUser] = useState({name: 'Loading...', createdAt: '2000-01-31T03:24:00', rooms: [], fake: true})
-
-
 
   const state = {
     availableRooms, setAvailableRooms,
@@ -32,8 +31,17 @@ const Router = () => {
     user, setUser
   }
 
+  if (userId === '') {
+    const localId = window.localStorage.getItem('id')
+    console.log('localId', localId);
+    if (localId !== null) {
+      setUserId(localId)
+    }
+  }
+
   useEffect(() => {
     if (userId !== '') {
+      window.localStorage.setItem('id', userId)
       setMessages([])
       const chatManager = chat.connect(userId, setUser, (message) => {
         setLoaded(true)
@@ -43,6 +51,7 @@ const Router = () => {
       setChatManager(chatManager)
     }
   }, [userId, roomId]);
+  console.log(user);
 
   return (
     <BrowserRouter>

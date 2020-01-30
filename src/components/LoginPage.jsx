@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom'
 
 
 const LoginPage = () => {
-  const { setUserId, setUser } = useContext(AppContext)
+  const { setUserId, setUser, user } = useContext(AppContext)
   const [ currentUserId, setCurrentUserId ] = useState('')
   const [ redirect, setRedirect ] = useState(false)
 
@@ -13,7 +13,7 @@ const LoginPage = () => {
     setUser({name: 'Loading...', createdAt: '2000-01-31T03:24:00', rooms: [], fake: true})
   }, [setUser])
 
-  if (redirect) {
+  if (redirect || !user.fake) {
     return <Redirect to='/messages'/>
   }
 
